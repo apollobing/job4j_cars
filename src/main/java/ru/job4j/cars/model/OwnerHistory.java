@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
-
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -17,15 +15,15 @@ public class OwnerHistory {
     @EqualsAndHashCode.Include
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id")
     private Car car;
 
-    private LocalDateTime startAt;
-
-    private LocalDateTime endAt;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "history_id")
+    private History history;
 }

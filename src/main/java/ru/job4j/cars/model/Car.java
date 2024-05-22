@@ -3,8 +3,8 @@ package ru.job4j.cars.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "car")
@@ -31,6 +31,11 @@ public class Car {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @OneToMany(mappedBy = "car")
-    private Set<OwnerHistory> owners = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "history_owners",
+            joinColumns = { @JoinColumn(name = "car_id") },
+            inverseJoinColumns = { @JoinColumn(name = "owner_id") }
+    )
+    private List<Owner> owners = new ArrayList<>();
 }
