@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.MutationQuery;
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +14,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+@Repository
 @AllArgsConstructor
 public class CrudRepository {
     private final SessionFactory sf;
@@ -25,7 +29,7 @@ public class CrudRepository {
 
     public void run(String query, Map<String, Object> args) {
         Consumer<Session> command = session -> {
-            var sq = session
+            MutationQuery sq = session
                     .createMutationQuery(query);
             for (Map.Entry<String, Object> arg : args.entrySet()) {
                 sq.setParameter(arg.getKey(), arg.getValue());
@@ -37,7 +41,7 @@ public class CrudRepository {
 
     public <T> Optional<T> optional(String query, Class<T> cl, Map<String, Object> args) {
         Function<Session, Optional<T>> command = session -> {
-            var sq = session
+            Query<T> sq = session
                     .createQuery(query, cl);
             for (Map.Entry<String, Object> arg : args.entrySet()) {
                 sq.setParameter(arg.getKey(), arg.getValue());
@@ -56,7 +60,7 @@ public class CrudRepository {
 
     public <T> List<T> query(String query, Class<T> cl, Map<String, Object> args) {
         Function<Session, List<T>> command = session -> {
-            var sq = session
+            Query<T> sq = session
                     .createQuery(query, cl);
             for (Map.Entry<String, Object> arg : args.entrySet()) {
                 sq.setParameter(arg.getKey(), arg.getValue());
@@ -69,7 +73,7 @@ public class CrudRepository {
     public <T> T tx(Function<Session, T> command) {
         Session session = sf.openSession();
         Transaction transaction = null;
-        try (session) {
+        try {
             transaction = session.beginTransaction();
             T rsl = command.apply(session);
             transaction.commit();
@@ -79,6 +83,8 @@ public class CrudRepository {
                 transaction.rollback();
             }
             throw e;
+        } finally {
+            session.close();
         }
     }
 }
