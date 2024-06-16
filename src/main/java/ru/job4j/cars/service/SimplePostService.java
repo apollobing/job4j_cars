@@ -1,5 +1,6 @@
 package ru.job4j.cars.service;
 
+import lombok.Builder;
 import org.springframework.stereotype.Service;
 import ru.job4j.cars.dto.FileDto;
 import ru.job4j.cars.dto.PostDto;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Builder(builderMethodName = "of")
 @Service
 public class SimplePostService implements PostService {
 
@@ -30,20 +32,6 @@ public class SimplePostService implements PostService {
     private final HistoryRepository historyRepository;
 
     private final FileService fileService;
-
-    public SimplePostService(PostRepository postRepository, EngineRepository engineRepository,
-                             CarBodyRepository carBodyRepository, FileService fileService, CarRepository carRepository,
-                             OwnerRepository ownerRepository, OwnerHistoryRepository ownerHistoryRepository,
-                             HistoryRepository historyRepository) {
-        this.postRepository = postRepository;
-        this.engineRepository = engineRepository;
-        this.carBodyRepository = carBodyRepository;
-        this.fileService = fileService;
-        this.carRepository = carRepository;
-        this.ownerRepository = ownerRepository;
-        this.ownerHistoryRepository = ownerHistoryRepository;
-        this.historyRepository = historyRepository;
-    }
 
     @Override
     public Post create(PostDto postDto, FileDto image) {
