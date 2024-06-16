@@ -6,10 +6,10 @@ import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "history")
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class History {
 
     @Id

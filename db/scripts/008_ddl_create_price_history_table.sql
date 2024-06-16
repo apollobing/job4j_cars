@@ -4,5 +4,5 @@ create table price_history
    before           bigint not null,
    after            bigint not null,
    created          timestamp without time zone default now(),
-   auto_post_id     int REFERENCES auto_post(id)
+   car_id           int REFERENCES car(id)
 );

@@ -4,14 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "car")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Car {
@@ -23,13 +24,24 @@ public class Car {
 
     private String name;
 
+    private String vin;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "engine_id")
     private Engine engine;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "car_body_id")
+    private CarBody carBody;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private Owner owner;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    @OrderBy
+    private List<PriceHistory> price = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
@@ -37,5 +49,5 @@ public class Car {
             joinColumns = { @JoinColumn(name = "car_id") },
             inverseJoinColumns = { @JoinColumn(name = "owner_id") }
     )
-    private List<Owner> owners = new ArrayList<>();
+    private Set<Owner> owners = new HashSet<>();
 }

@@ -7,15 +7,22 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <include file="scripts/001_ddl_create_auto_user_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/002_ddl_create_auto_post_table.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/003_dml_insert_users.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/004_ddl_create_price_history_table.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/005_ddl_create_participates_table.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/006_ddl_create_engine_table.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/007_ddl_create_owner_table.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/008_ddl_create_car_table.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/009_ddl_create_history_table.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/010_ddl_create_history_owners_table.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/011_ddl_alter_auto_post_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/003_ddl_create_car_body_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/004_ddl_create_engine_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/005_ddl_create_owner_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/006_dml_insert_users.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/007_ddl_create_car_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/008_ddl_create_price_history_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/009_ddl_create_participates_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/010_ddl_create_history_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/011_ddl_create_history_owners_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/012_ddl_alter_auto_post_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/013_ddl_alter_auto_post_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/014_ddl_create_files_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/015_ddl_alter_auto_post_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/016_ddl_alter_auto_user_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/017_dml_insert_car_bodies.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/018_dml_insert_engines.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/019_ddl_alter_auto_post_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/020_dml_insert_files.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

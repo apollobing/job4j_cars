@@ -1,2 +1,2 @@
 ALTER TABLE auto_post
-ADD COLUMN name varchar not null;
+ADD COLUMN car_id int not null unique references car(id);
