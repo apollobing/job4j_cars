@@ -1,0 +1,23 @@
+<div th:fragment="header">
+    <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Job4jCars</a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav me-auto">
+                    <a class="nav-item nav-link active" th:href="@{/posts/all}">All</a>
+                    <a class="nav-item nav-link" th:href="@{/posts/new}">New</a>
+                    <a class="nav-item nav-link" th:href="@{/posts/photo}">With Photo</a>
+                    <a class="btn btn-success ms-3" th:href="@{/posts/post/add}">Add</a>
+                </div>
+                <div class="navbar-nav ml-auto" th:if="${user.name == 'Guest' || user.name == null || error != null}">
+                    <a class="nav-link text-secondary" th:href="@{/users/register}">Register</a>
+                    <a class="nav-link text-secondary" th:href="@{/users/login}">Login</a>
+                </div>
+                <div class="navbar-nav ml-auto" th:if="${user.name != 'Guest' && user.name != null && error == null}">
+                    <a class="nav-link text-secondary" href="#" th:text="${user.name}"></a>
+                    <a class="nav-link text-secondary" th:href="@{/users/logout}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
