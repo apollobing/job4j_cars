@@ -631,7 +631,6 @@ class HibernatePostRepositoryTest {
         ownerRepository.create(owner1);
 
         Engine engine = engineRepository.findById(1).orElseThrow();
-
         CarBody carBody = carBodyRepository.findById(1).orElseThrow();
 
         Car car1 = new Car();
@@ -682,22 +681,18 @@ class HibernatePostRepositoryTest {
         Post post1 = new Post();
         post1.setDescription("Sell new BMW");
         post1.setCreated(LocalDateTime.now().withNano(0));
-        post1.setSold(false);
         post1.setFileId(1);
         post1.setUser(user1);
         post1.setParticipates(Set.of(user2));
         post1.setCar(car1);
         postRepository.create(post1);
 
-        File newFile = new File();
-        newFile.setName("file2Name");
-        newFile.setPath("file2.png");
+        File newFile = new File("file2Name", "file2.png");
         fileRepository.save(newFile);
 
         Post post2 = new Post();
         post2.setDescription("Sell new Volkswagen");
         post2.setCreated(LocalDateTime.now());
-        post2.setSold(false);
         post2.setFileId(newFile.getId());
         post2.setUser(user2);
         post2.setParticipates(Set.of(user1));
