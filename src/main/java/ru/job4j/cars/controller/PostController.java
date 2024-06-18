@@ -1,6 +1,7 @@
 package ru.job4j.cars.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import java.util.Optional;
 @ThreadSafe
 @Controller
 @RequestMapping("/posts")
+@AllArgsConstructor
 public class PostController {
 
     private final PostService postService;
@@ -33,14 +35,6 @@ public class PostController {
     private final CarBodyService carBodyService;
 
     private final OwnerHistoryService ownerHistoryService;
-
-    public PostController(PostService postService, EngineService engineService,
-                          CarBodyService carBodyService, OwnerHistoryService ownerHistoryService) {
-        this.postService = postService;
-        this.engineService = engineService;
-        this.ownerHistoryService = ownerHistoryService;
-        this.carBodyService = carBodyService;
-    }
 
     @GetMapping("/all")
     public String getAll(Model model) {
